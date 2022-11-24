@@ -1,0 +1,64 @@
+service: bookCRUD
+frameworkVersion: '3'
+
+custom:
+  serverless-offline:
+    httpPort : 6007
+    lamdaPort : 6007
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+plugins:
+  - serverless-offline
+
+functions:
+  insertAll:
+    handler: index.insertAll
+    events:
+      - http:
+          path: /send
+          method: post
+  add:
+    handler: addOne.add
+    events: 
+      - http:
+          path: /add
+          method: post
+  search:
+    handler: searchBook.search
+    events: 
+      - http:
+          path: /search
+          method: post
+  deleteBook:
+    handler: deleteBook.deleteBook
+    events: 
+      - http:
+          path: /delOne
+          method: delete
+  update: 
+    handler: updateBook.update
+    events: 
+      - http:
+          path: /update
+          method: put
+  insertCount:
+    handler: count.insertCount
+    events:
+      - http:
+          path: /insertCount
+          method: get
+  bookPagination:
+    handler: getBookPagination.bookPagination
+    events:
+      - http:
+          path: /bookPagination
+          method: post
+  getAll:
+    handler: getBook.getAll
+    events:
+      - http:
+          path: /getAllBooks
+          method: get      
